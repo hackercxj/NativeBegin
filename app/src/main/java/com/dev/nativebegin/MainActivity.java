@@ -3,12 +3,14 @@ package com.dev.nativebegin;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.dev.nativebegin.databinding.ActivityMainBinding;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,13 +35,15 @@ public class MainActivity extends AppCompatActivity {
 
         //获取TextView，Button控件
         final TextView tv1 = (TextView) findViewById(R.id.sample_text);
+        final TextInputEditText editText = (TextInputEditText) findViewById(R.id.text);
         final Button btn = (Button)findViewById(R.id.button);
         //设置点击后TextView现实的内容
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String s = method01("hello");
-                Log.i("dev", "加密结果: "+s);
+                String plaintext = editText.getText().toString();
+                String s = method01(plaintext);
+                Log.i("dev", plaintext + "加密结果: " + s);
                 tv.setText(s);
         }});
 
@@ -50,7 +54,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String s = (String) tv.getText();
                 String result = method02(s);
-                Log.i("dev", "解密结果: "+result);
+                Log.i("dev", s + "解密结果: "+result);
+                tv.setText(result);
             }});
 
 
